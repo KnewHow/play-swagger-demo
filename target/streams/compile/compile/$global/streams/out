@@ -61,11 +61,10 @@
 [0m[[0m[31merror[0m] [0m[0m/home/ygh/project/play-swa-demo/app/controllers/ExampleController.scala:64:35: not found: type FlatSpec[0m
 [0m[[0m[31merror[0m] [0m[0mobject  ExampleController extends FlatSpec{[0m
 [0m[[0m[31merror[0m] [0m[0m                                  ^[0m
-[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/app/controllers/ExampleController.scala:67:43: Adaptation of argument list by inserting () is deprecated: leaky (Object-receiving) target makes this especially dangerous.[0m
-[0m[[0m[33mwarn[0m] [0m[0m        signature: PlaySwagger.playApi[C](a: Any): List[String][0m
-[0m[[0m[33mwarn[0m] [0m[0m  given arguments: <none>[0m
-[0m[[0m[33mwarn[0m] [0m[0m after adaptation: PlaySwagger.playApi((): Unit)[0m
-[0m[[0m[33mwarn[0m] [0m[0m    PlaySwagger.playApi[ExampleController]()[0m
-[0m[[0m[33mwarn[0m] [0m[0m                                          ^[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
-[0m[[0m[31merror[0m] [0m[0m21 errors found[0m
+[0m[[0m[31merror[0m] [0m[0m/home/ygh/project/play-swa-demo/app/controllers/ExampleController.scala:66:12: not found: value swagger[0m
+[0m[[0m[31merror[0m] [0m[0m    import swagger.api._[0m
+[0m[[0m[31merror[0m] [0m[0m           ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/ygh/project/play-swa-demo/app/controllers/ExampleController.scala:67:5: not found: value PlaySwagger[0m
+[0m[[0m[31merror[0m] [0m[0m    PlaySwagger.playApi[ExampleController]()[0m
+[0m[[0m[31merror[0m] [0m[0m    ^[0m
+[0m[[0m[31merror[0m] [0m[0m23 errors found[0m

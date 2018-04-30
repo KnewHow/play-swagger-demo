@@ -4,7 +4,7 @@
 		module="play-swagger-example_2.12"
 		revision="1.0-SNAPSHOT"
 		status="integration"
-		publication="20180430160530"
+		publication="20180430174651"
 	>
 		<description>
 		play-swagger-example
@@ -49,7 +49,6 @@
 		<dependency org="com.typesafe.play" name="play-logback_2.12" rev="2.6.13" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-akka-http-server_2.12" rev="2.6.13" conf="compile->default(compile)"/>
 		<dependency org="com.typesafe.play" name="play-guice_2.12" rev="2.6.13" conf="compile->default(compile)"/>
-		<dependency org="play-swagger-api" name="play-swagger-api_2.12" rev="0.1.0-SNAPSHOT" conf="compile->default(compile)"/>
-		<dependency org="play-swagger-core" name="play-swagger-core_2.12" rev="0.1.0-SNAPSHOT" conf="compile->default(compile)"/>
+		<dependency org="swagger" name="play-swagger_2.12" rev="0.1.0-SNAPSHOT" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>

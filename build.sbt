@@ -12,6 +12,4 @@ crossScalaVersions := Seq("2.11.12", "2.12.4")
 
 libraryDependencies += guice
 
-libraryDependencies += "play-swagger-api" %% "play-swagger-api" % "0.1.0-SNAPSHOT"
-
-libraryDependencies += "play-swagger-core" %% "play-swagger-core" % "0.1.0-SNAPSHOT"
+libraryDependencies += "swagger" %% "play-swagger" % "0.1.0-SNAPSHOT"
