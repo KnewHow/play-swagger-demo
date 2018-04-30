@@ -1,0 +1,35 @@
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:35:17: non-variable type argument String in type pattern scala.collection.immutable.Map[String,Any] (the underlying of Map[String,Any]) is unchecked since it is eliminated by erasure[0m
+[0m[[0m[33mwarn[0m] [0m[0m      case (k,v:Map[String,Any]) => "\"" + k + "\"" + ":" +toJSONStr(v)[0m
+[0m[[0m[33mwarn[0m] [0m[0m                ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:3:16: Unused import[0m
+[0m[[0m[33mwarn[0m] [0m[0mimport java.io.FileWriter[0m
+[0m[[0m[33mwarn[0m] [0m[0m               ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:6:22: Unused import[0m
+[0m[[0m[33mwarn[0m] [0m[0mimport org.joda.time._[0m
+[0m[[0m[33mwarn[0m] [0m[0m                     ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:11:9: local val controller in method api is never used[0m
+[0m[[0m[33mwarn[0m] [0m[0m    val controller = c.weakTypeTag[C].tpe[0m
+[0m[[0m[33mwarn[0m] [0m[0m        ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:99:9: local var s in method isBasicType is never set: consider using immutable val[0m
+[0m[[0m[33mwarn[0m] [0m[0m    var s = t.toString[0m
+[0m[[0m[33mwarn[0m] [0m[0m        ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:100:9: local var tStr in method isBasicType is never set: consider using immutable val[0m
+[0m[[0m[33mwarn[0m] [0m[0m    var tStr = if (s.contains("[")) {[0m
+[0m[[0m[33mwarn[0m] [0m[0m        ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/action/SwaActionBuilder.scala:12:24: higher-kinded type should be enabled[0m
+[0m[[0m[33mwarn[0m] [0m[0mby making the implicit value scala.language.higherKinds visible.[0m
+[0m[[0m[33mwarn[0m] [0m[0mThis can be achieved by adding the import clause 'import scala.language.higherKinds'[0m
+[0m[[0m[33mwarn[0m] [0m[0mor by setting the compiler option -language:higherKinds.[0m
+[0m[[0m[33mwarn[0m] [0m[0mSee the Scaladoc for value scala.language.higherKinds for a discussion[0m
+[0m[[0m[33mwarn[0m] [0m[0mwhy the feature should be explicitly enabled.[0m
+[0m[[0m[33mwarn[0m] [0m[0mclass SwaActionBuilder[Req[_], A] private([0m
+[0m[[0m[33mwarn[0m] [0m[0m                       ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/action/SwaActionBuilder.scala:51:13: higher-kinded type should be enabled[0m
+[0m[[0m[33mwarn[0m] [0m[0mby making the implicit value scala.language.higherKinds visible.[0m
+[0m[[0m[33mwarn[0m] [0m[0m  def apply[Req[_], A, Res](builder: ActionBuilder[Req, A]) = {[0m
+[0m[[0m[33mwarn[0m] [0m[0m            ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/ygh/project/play-swa-demo/play-swagger-api/src/main/scala/com/dripower/play/swa/Macros.scala:33:12: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: (_, _)[0m
+[0m[[0m[33mwarn[0m] [0m[0m    api.map{[0m
+[0m[[0m[33mwarn[0m] [0m[0m           ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m9 warnings found[0m
