@@ -9,29 +9,29 @@ import scala.concurrent._
 import com.dripower.play.swa._
 import org.joda.time._
 
-case class Car(id:Long,logo:String)
-case class PersonGet(id: Long)
-case class Person(id: Long, name: String, age: Int,car: Car,level1ExpiredAt: Option[DateTime] = None,avatar: Option[String] = None,gmtCreate:DateTime = DateTime.now(),gmtModified:DateTime = DateTime.now(),friends:List[Friend] = List())
-case class Friend(id:Long,name:String,relation:String)
-case class Ids(ids:List[Long],op:Option[String])
+// case class Car(id:Long,logo:String)
+// case class PersonGet(id: Long)
+// case class Person(id: Long, name: String, age: Int,car: Car,level1ExpiredAt: Option[DateTime] = None,avatar: Option[String] = None,gmtCreate:DateTime = DateTime.now(),gmtModified:DateTime = DateTime.now(),friends:List[Friend] = List())
+// case class Friend(id:Long,name:String,relation:String)
+// case class Ids(ids:List[Long],op:Option[String])
 
-object PersonGet {
-  implicit val format = Json.format[PersonGet]
-}
+// object PersonGet {
+//   implicit val format = Json.format[PersonGet]
+// }
 
-object Ids {
-  implicit val format = Json.format[Ids]
-}
+// object Ids {
+//   implicit val format = Json.format[Ids]
+// }
 
 
-object Person {
-  implicit val personWriteable = Writeable((p: Person) => ByteString(p.toString), Some("text/plain"))
+// object Person {
+//   implicit val personWriteable = Writeable((p: Person) => ByteString(p.toString), Some("text/plain"))
 
-  implicit val personListWriteable = Writeable((ps: List[Person]) => ByteString(ps.toString), Some("text/plain"))
-}
+//   implicit val personListWriteable = Writeable((ps: List[Person]) => ByteString(ps.toString), Some("text/plain"))
+// }
 
 @Singleton
-class ExampleController  @Inject() (val controllerComponents: ControllerComponents)(implicit ec: ExecutionContext) extends BaseController {
+class ExampleController2  @Inject() (val controllerComponents: ControllerComponents)(implicit ec: ExecutionContext) extends BaseController {
 
   val Swa = SwaActionBuilder(Action)
 
