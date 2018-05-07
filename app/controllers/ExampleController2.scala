@@ -1,4 +1,4 @@
-package controllers
+package controllers.example
 
 import akka.util.ByteString
 import play.api.mvc._

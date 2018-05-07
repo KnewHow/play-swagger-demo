@@ -1,10 +1,9 @@
-package controllers.api
+package controllers
 
 import javax.inject._
-
 import play.api.mvc._
-import swagger.api._
-import controllers._
+import play.swagger.api._
+import controllers.example._
 import play.api.libs.json._
 
 @Singleton

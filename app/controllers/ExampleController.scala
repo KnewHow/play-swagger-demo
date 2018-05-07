@@ -1,4 +1,4 @@
-package controllers
+package controllers.example
 
 import akka.util.ByteString
 import play.api.mvc._
@@ -45,6 +45,7 @@ class ExampleController  @Inject() (val controllerComponents: ControllerComponen
     val personGet = req.body
     Future.successful(Person(personGet.id, "foo", 1,Car(1L,"奔驰")))
   }
+
 
    def exampleGetAction:GetSwaAction[PersonGet, List[Person]] = Swa.asyncGet[PersonGet,List[Person]](parse.json[PersonGet]) { req =>
     val personGet = req.body
