@@ -1,11 +1,11 @@
-2018-05-07 08:42:00,494 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-6 - ApplicationTimer demo: Starting application at 2018-05-07T00:42:00.493Z.
-2018-05-07 08:42:01,250 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-6 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2018-05-10 10:15:56,525 [INFO] from application in play-dev-mode-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2018-05-10T02:15:56.525Z.
+2018-05-10 10:15:57,367 [INFO] from play.api.http.EnabledFilters in play-dev-mode-akka.actor.default-dispatcher-2 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
     filters.ExampleFilter
 
-2018-05-07 08:42:01,256 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-6 - Application started (Dev)
-2018-05-07 14:34:43,239 [INFO] from play.core.server.AkkaHttpServer in pool-6-thread-4 - Stopping server...
-2018-05-07 14:34:43,290 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Stopping application at 2018-05-07T06:34:43.290Z after 21163s.
+2018-05-10 10:15:57,377 [INFO] from play.api.Play in play-dev-mode-akka.actor.default-dispatcher-2 - Application started (Dev)
+2018-05-10 10:19:24,150 [INFO] from play.core.server.AkkaHttpServer in pool-8-thread-7 - Stopping server...
+2018-05-10 10:19:24,203 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2018-05-10T02:19:24.203Z after 208s.

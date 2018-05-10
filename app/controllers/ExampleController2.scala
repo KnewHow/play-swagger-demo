@@ -8,6 +8,7 @@ import play.api.http.Writeable
 import scala.concurrent._
 import com.dripower.play.swa._
 import org.joda.time._
+import play.swagger.annotation._
 
 // case class Car(id:Long,logo:String)
 // case class PersonGet(id: Long)
@@ -35,17 +36,14 @@ class ExampleController2  @Inject() (val controllerComponents: ControllerCompone
 
   val Swa = SwaActionBuilder(Action)
 
-  def exampleAction: SwaAction[PersonGet, Person] = Swa.async[PersonGet,Person](parse.json[PersonGet]) { req =>
-    val personGet = req.body
 
-    Future.successful(Person(personGet.id, "foo", 1,Car(1L,"奔驰")))
-  }
-
+  @ActionAnnotation(descrip="测试 POST 请求")
   def examplePostAction:PostSwaAction [PersonGet, Person] = Swa.asyncPost[PersonGet,Person](parse.json[PersonGet]) { req =>
     val personGet = req.body
     Future.successful(Person(personGet.id, "foo", 1,Car(1L,"奔驰")))
   }
 
+  @ActionAnnotation(descrip="测试 GET 请求")
    def exampleGetAction:GetSwaAction[PersonGet, List[Person]] = Swa.asyncGet[PersonGet,List[Person]](parse.json[PersonGet]) { req =>
     val personGet = req.body
     Future.successful(List(Person(personGet.id, "foo", 1,Car(1L,"奔驰"))))
