@@ -12,7 +12,35 @@ class ApiController @Inject()(cc: ControllerComponents) (implicit assetsFinder: 
 
 
   def api = Action {
-    val apis = PlaySwagger.playApi[ExampleController]() ++ PlaySwagger.playApi[ExampleController2]()
-    Ok(apis.mkString("[", ",", "]"))
+    val apis = List(
+      scoreApi(),
+      bookApi()
+    ).mkString("[", ",", "]")
+    println(s"scoreApi ->\n ${apis}")
+    Ok(apis)
+  }
+
+  private def scoreApi():String = {
+    import controllers.score._
+    val apis = List(
+      getControllerJson("scoreInvite", PlaySwagger.playApi[ScoreInviteApi]().mkString("[", ",", "]")),
+      getControllerJson("score", PlaySwagger.playApi[ScoreApi]().mkString("[", ",", "]"))
+    ).mkString("[", ",", "]")
+
+    "{" + "\"" + "score" +  "\"" + ":" + apis + "}"
+  }
+
+  private def bookApi():String = {
+    import controllers.book._
+    val apis = List(
+      getControllerJson("book",  PlaySwagger.playApi[BookApi]().mkString("[", ",", "]")),
+      getControllerJson("bookBorrow",  PlaySwagger.playApi[BorrowBookApi]().mkString("[", ",", "]"))
+    ).mkString("[", ",", "]")
+
+    "{" + "\"" + "book" +  "\"" + ":" + apis + "}"
+  }
+
+   private def getControllerJson(name: String, json:String):String = {
+    "{" + "\"" + name  +  "\"" + ":" + json + "}"
   }
 }
