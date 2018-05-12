@@ -15,4 +15,6 @@ GET     /assets/*file               controllers.Assets.versioned(file)
 
 GET     /apis               controllers.ApiController.api
 
+POST    /queryBook          controllers.book.BookApi.queryBook
+
 ->      /              myRoute.MyRoute

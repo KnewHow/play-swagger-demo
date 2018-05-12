@@ -71,6 +71,7 @@ class ScoreApi @Inject() (val controllerComponents: ControllerComponents) (impli
     }
   }
 
+  @ActionAnnotation(descrip="更新用户积分")
   def updateScore: PostSwaAction[ScoreUpdateForm, Score] = Swa.asyncPost[ScoreUpdateForm, Score](parse.json[ScoreUpdateForm]) { req =>
     val suf = req.body
     Future.successful {
