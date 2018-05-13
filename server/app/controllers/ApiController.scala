@@ -16,7 +16,6 @@ class ApiController @Inject()(cc: ControllerComponents) (implicit assetsFinder: 
       scoreApi(),
       bookApi()
     ).mkString("[", ",", "]")
-    println(s"scoreApi ->\n ${apis}")
     Ok(apis)
   }
 
