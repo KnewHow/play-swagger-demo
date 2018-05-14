@@ -1,8 +1,14 @@
 <template>
   <div>
     <div v-for="(name, index) in firstCateName" :key="index">
-      <span>{{name}}</span>
-      <span>{{index}}</span>
+      <div class="first-cate-name">
+        <span>
+          {{index}}
+        </span>
+        <span>
+          {{name}}
+        </span>
+      </div>
     </div>
   </div>
 </template>

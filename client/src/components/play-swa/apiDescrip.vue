@@ -1,5 +1,5 @@
 <template>
-  <div>api-descrip</div>
+  <div></div>
 </template>
 
 <script>

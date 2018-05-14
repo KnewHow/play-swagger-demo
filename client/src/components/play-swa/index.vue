@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="play-swa-header">
+      <span class="title"> Play Swa </span>
+    </div>
     <directory></directory>
     <apiDescrip></apiDescrip>
   </div>
@@ -17,5 +20,14 @@ export default {
 </script>
 
 <style scoped>
+.play-swa-header {
+  background: green;
+  height: 100px;
+}
 
+.play-swa-header .title {
+  padding-top: 50%;
+  padding-left: 50%;
+  color: red;
+}
 </style>
