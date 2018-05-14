@@ -5,6 +5,7 @@ import play.api.mvc._
 import play.swagger.api._
 import controllers.example._
 import play.api.libs.json._
+import org.joda.time._
 
 @Singleton
 class ApiController @Inject()(cc: ControllerComponents) (implicit assetsFinder: AssetsFinder)
@@ -16,6 +17,7 @@ class ApiController @Inject()(cc: ControllerComponents) (implicit assetsFinder: 
       scoreApi(),
       bookApi()
     ).mkString("[", ",", "]")
+    println(s"${DateTime.now()} ->\n ${apis}")
     Ok(apis)
   }
 
