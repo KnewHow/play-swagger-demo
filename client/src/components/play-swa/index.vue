@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="play-swa-header">
-      <span class="title"> Play Swa </span>
+      <div class="title"> Play Swa </div>
     </div>
-    <directory></directory>
-    <apiDescrip></apiDescrip>
+    <div class="content">
+      <directory></directory>
+    </div>
   </div>
 </template>
 
@@ -21,13 +22,16 @@ export default {
 
 <style scoped>
 .play-swa-header {
-  background: green;
+  background: rgb(233, 104, 107);
   height: 100px;
 }
 
 .play-swa-header .title {
-  padding-top: 50%;
+  padding-top: 28px;
   padding-left: 50%;
-  color: red;
+  font-size: 37px;
+  color: #fff;
+  font-style: italic;
+  font-weight: bold;
 }
 </style>
