@@ -14,8 +14,15 @@
               {{name}}
             </span>
           </div>
-          <div class="second-cate" v-if="isShowSecondCate(index)" data-test="secondCateFlag[index]">
-            二级目录
+          <div class="second-cate" :id="'second-cate-' + index">
+            <div v-for="(seName, seIndex) in abstractSecondCate(index)" :key="seIndex">
+              <span>
+                {{seIndex+1}}
+              </span>
+              <span>
+                {{seName}}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -34,8 +41,8 @@ export default {
       category: null,
       firstCateName: null,
       firstCate: null,
-      secondCateFlag: null,
-      flag: false
+      secondCate: null,
+      secondCateFlag: null
     }
   },
   methods: {
@@ -51,24 +58,37 @@ export default {
     initFirstCategory (c) {
       var firstCateName = []
       var firstCate = []
+      var secondCate = []
       var secondCateFlag = []
       for (var index in c) {
-        console.log('index' + Object.keys(c[index]))
-        firstCateName[index] = Object.keys(c[index])[0]
+        var key = Object.keys(c[index])[0]
+        firstCateName[index] = key
         firstCate[index] = c[index]
+        secondCate[index] = c[index][key]
         secondCateFlag[index] = false
       }
       this.firstCateName = firstCateName
       this.firstCate = firstCate
+      this.secondCate = secondCate
       this.secondCateFlag = secondCateFlag
     },
-    abstractSecondCate () {
-
+    abstractSecondCate (index) {
+      var secondName = []
+      for (var i in this.secondCate[index]) {
+        var se = this.secondCate[index][i]
+        for (var k in se) {
+          secondName[i] = k
+        }
+      }
+      return secondName
     },
     expandSecondCategory (index) {
-      this.secondCateFlag[index] = true
-      this.flag = true
-      console.log('lala' + this.secondCateFlag[index])
+      this.secondCateFlag[index] = !this.secondCateFlag[index]
+      if (!this.secondCateFlag[index]) {
+        document.getElementById('second-cate-' + index).style.display = 'none'
+      } else {
+        document.getElementById('second-cate-' + index).style.display = 'block'
+      }
     },
     isShowSecondCate (index) {
       console.log('is' + (this.secondCateFlag[index] === true))
@@ -107,6 +127,9 @@ export default {
   cursor:pointer;
   font-size: 25px;
   margin: 10px 0px 10px 10px;
+}
+.second-cate {
+  display: none
 }
 .detail {
   float: left;
