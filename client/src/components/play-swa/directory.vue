@@ -5,8 +5,8 @@
         <div class="d-name">
           目录
         </div>
-        <div  v-for="(name, index) in firstCateName" :key="index" @click="expandSecondCategory(index)">
-          <div class="first-cate-name">
+        <div  v-for="(name, index) in firstCateName" :key="index">
+          <div class="first-cate-name" @click="expandSecondCategory(index)">
             <span>
               {{index+1}}
             </span>
@@ -16,12 +16,26 @@
           </div>
           <div class="second-cate" :id="'second-cate-' + index">
             <div v-for="(seName, seIndex) in abstractSecondCate(index)" :key="seIndex">
-              <span>
-                {{seIndex+1}}
-              </span>
-              <span>
-                {{seName}}
-              </span>
+              <div class="second-cate-name" @click="expandThirdCategory(index,seIndex)">
+                <span>
+                  {{index+1}}.{{seIndex+1}}
+                </span>
+                <span>
+                  {{seName}}
+                </span>
+              </div>
+              <div class="third-cate" :id="'third-cate-' + index + seIndex">
+                <div v-for="(thName,thIndex) in abstractThirdCate(index,seIndex)" :key="thIndex">
+                  <div class="third-cate-name">
+                    <span>
+                      {{index+1}}.{{seIndex+1}}.{{thIndex+1}}
+                    </span>
+                    <span>
+                      {{thName}}
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -42,7 +56,8 @@ export default {
       firstCateName: null,
       firstCate: null,
       secondCate: null,
-      secondCateFlag: null
+      secondCateFlag: null,
+      thirdCateFlag: null
     }
   },
   methods: {
@@ -60,6 +75,7 @@ export default {
       var firstCate = []
       var secondCate = []
       var secondCateFlag = []
+      var thirdCateFlag = []
       for (var index in c) {
         var key = Object.keys(c[index])[0]
         firstCateName[index] = key
@@ -67,10 +83,17 @@ export default {
         secondCate[index] = c[index][key]
         secondCateFlag[index] = false
       }
+      for (var i in c) {
+        thirdCateFlag[i] = []
+        for (var j in secondCate) {
+          thirdCateFlag[i][j] = false
+        }
+      }
       this.firstCateName = firstCateName
       this.firstCate = firstCate
       this.secondCate = secondCate
       this.secondCateFlag = secondCateFlag
+      this.thirdCateFlag = thirdCateFlag
     },
     abstractSecondCate (index) {
       var secondName = []
@@ -82,12 +105,31 @@ export default {
       }
       return secondName
     },
+    abstractThirdCate (firstIndex, secondIndex) {
+      var thirdCate = []
+      var se = this.secondCate[firstIndex][secondIndex]
+      for (var k in se) {
+        var thirdCateArr = se[k]
+        for (var i in thirdCateArr) {
+          thirdCate[i] = thirdCateArr[i].descrip
+        }
+      }
+      return thirdCate
+    },
     expandSecondCategory (index) {
       this.secondCateFlag[index] = !this.secondCateFlag[index]
       if (!this.secondCateFlag[index]) {
         document.getElementById('second-cate-' + index).style.display = 'none'
       } else {
         document.getElementById('second-cate-' + index).style.display = 'block'
+      }
+    },
+    expandThirdCategory (fi, si) {
+      this.thirdCateFlag[fi][si] = !this.thirdCateFlag[fi][si]
+      if (!this.thirdCateFlag[fi][si]) {
+        document.getElementById('third-cate-' + fi + si).style.display = 'none'
+      } else {
+        document.getElementById('third-cate-' + fi + si).style.display = 'block'
       }
     },
     isShowSecondCate (index) {
@@ -129,7 +171,20 @@ export default {
   margin: 10px 0px 10px 10px;
 }
 .second-cate {
-  display: none
+  display: none;
+}
+.second-cate-name {
+  cursor:pointer;
+  font-size: 20px;
+  margin: 10px 0px 10px 20px;
+}
+.third-cate {
+  display: none;
+}
+.third-cate-name {
+  cursor:pointer;
+  font-size: 15px;
+  margin: 10px 0px 10px 25px;
 }
 .detail {
   float: left;
