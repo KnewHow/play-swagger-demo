@@ -186,6 +186,9 @@ export default {
   font-size: 15px;
   margin: 10px 0px 10px 25px;
 }
+div:focus {
+  background-color: rgb(233, 104, 107);
+}
 .detail {
   float: left;
 }
