@@ -17,4 +17,4 @@ GET     /apis               controllers.ApiController.api
 
 POST    /queryBook          controllers.book.BookApi.queryBook
 
-# ->      /              myRoute.MyRoute
+->      /              myRoute.MyRoute

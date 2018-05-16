@@ -14,9 +14,13 @@ import play.api.mvc._
 import play.api.routing.Router.Routes
 import play.api.routing.sird._
 import play.api.routing.{ Router, SimpleRouter }
+import controllers.score._
+import controllers.book._
 
-class MyRoute @Inject()(c1:ExampleController,c2:HomeController) extends SimpleRouter {
-  val rs = PlaySwagger.routes[ExampleController](c1)
+
+
+class MyRoute @Inject()(ba: BookApi, bba: BorrowBookApi, sa: ScoreApi, sia: ScoreInviteApi) extends SimpleRouter {
+  val rs = PlaySwagger.routes[BookApi](ba) ++  PlaySwagger.routes[BorrowBookApi](bba) ++  PlaySwagger.routes[ScoreApi](sa) ++  PlaySwagger.routes[ScoreInviteApi](sia)
 
   override def routes: Routes = {
     case r =>{

@@ -44,7 +44,7 @@
     </div>
     <div class="detail" v-if="isShowDetail">
       <div class="overview">
-        <div class="descrip">{{api.descrip}}</div>
+        <div class="descrip">{{api.describe}}</div>
         <div class="route">
           <span>路由：</span>
           <span>{{api.route}}</span>
@@ -72,14 +72,28 @@
               <tr v-for="(v,k) in api.req" :key="k">
                 <td>{{k}}</td>
                 <td>{{v.type}}</td>
-                <td>{{v}}</td>
+                <td>{{v.describe}}</td>
               </tr>
             </table>
           </div>
         </div>
 
         <div class="response">
-
+          <div>响应参数列表:</div>
+          <div class="list">
+            <table class="table" border="1">
+              <tr>
+                <th>参数名称</th>
+                <th>参数类型</th>
+                <th>描述</th>
+              </tr>
+              <tr v-for="(v,k) in api.res" :key="k">
+                <td>{{k}}</td>
+                <td>{{v.type}}</td>
+                <td>{{v.describe}}</td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -152,7 +166,7 @@ export default {
       for (var k in se) {
         var thirdCateArr = se[k]
         for (var i in thirdCateArr) {
-          thirdCate[i] = thirdCateArr[i].descrip
+          thirdCate[i] = thirdCateArr[i].describe
         }
       }
       return thirdCate
@@ -290,6 +304,10 @@ div:focus {
   padding-bottom: 4px;
   color: #fff;
   background-color: green;
+}
+
+.response {
+  margin-top: 20px;
 }
 
 .h-show {
