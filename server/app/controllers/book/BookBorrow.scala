@@ -61,6 +61,40 @@ class BorrowBookApi @Inject() (val controllerComponents: ControllerComponents)(i
 
   val Swa = SwaActionBuilder(Action)
 
+
+  @ActionAnnotation(descrip="还书接口1")
+  def returnBook1: PostSwaAction[ReturnBook, BorrowRecord] = Swa.asyncPost[ReturnBook, BorrowRecord](parse.json[ReturnBook]) {req =>
+    val rb = req.body
+    Future.successful {
+      BorrowRecord(
+        "1",
+        rb.bid,
+        rb.sid,
+        true,
+        DateTime.now(),
+        DateTime.now(),
+        DateTime.now()
+     )
+    }
+  }
+
+  @ActionAnnotation(descrip="借书接口1")
+  def borrowBook1:PostSwaAction[CreateBorrowRecord, BorrowRecord] =  Swa.asyncPost[CreateBorrowRecord, BorrowRecord](parse.json[CreateBorrowRecord]) {req =>
+    val cbr = req.body
+    Future.successful {
+      BorrowRecord(
+        "1",
+        cbr.bid,
+        cbr.sid,
+        false,
+        DateTime.now(),
+        DateTime.now(),
+        DateTime.now()
+      )
+    }
+  }
+
+
    @ActionAnnotation(descrip="借书接口")
   def borrowBook:PostSwaAction[CreateBorrowRecord, BorrowRecord] =  Swa.asyncPost[CreateBorrowRecord, BorrowRecord](parse.json[CreateBorrowRecord]) {req =>
     val cbr = req.body

@@ -26,7 +26,6 @@ class MyRoute @Inject()(ba: BookApi, bba: BorrowBookApi, sa: ScoreApi, sia: Scor
     case r =>{
       getAction(r.path)
     }
-
   }
 
   private def getAction(path:String) = {
