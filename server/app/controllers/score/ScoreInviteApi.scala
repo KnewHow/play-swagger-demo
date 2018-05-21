@@ -71,9 +71,9 @@ class ScoreInviteApi @Inject() (val controllerComponents: ControllerComponents) 
   val Swa =  SwaActionBuilder(Action)
 
   @ActionAnnotation(descrip="查询用户积分邀请记录")
-  def queryScoreInviteRecords: PostSwaAction[ScoreInviteQueryFrom, ScoreInviteQueryResults] = Swa.asyncPost[ScoreInviteQueryFrom, ScoreInviteQueryResults](parse.json[ScoreInviteQueryFrom]) { req =>
+  def queryScoreInviteRecords: PostSwaAction[ScoreInviteQueryFrom, ScoreInviteRecord] = Swa.asyncPost[ScoreInviteQueryFrom, ScoreInviteRecord](parse.json[ScoreInviteQueryFrom]) { req =>
     val sqr = req.body
-    val rs =  List(
+    val rs =
         ScoreInviteRecord(
           sqr.weixinId,
           sqr.openid,
@@ -81,18 +81,9 @@ class ScoreInviteApi @Inject() (val controllerComponents: ControllerComponents) 
           123L,
           DateTime.now(),
           DateTime.now()
-        ),
-      ScoreInviteRecord(
-        sqr.weixinId,
-        sqr.openid,
-        "lisi",
-        123L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    )
+        )
     Future.successful {
-      ScoreInviteQueryResults(rs)
+      rs
     }
   }
 

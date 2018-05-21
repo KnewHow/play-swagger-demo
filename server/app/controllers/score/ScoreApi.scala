@@ -10,6 +10,7 @@ import com.dripower.play.swa._
 import org.joda.time._
 import play.swagger.annotation._
 import scala.annotation.meta
+import play.api.libs.json.Json
 
 case class ScoreGet(
   @(FieldAnnotation @meta.getter)(descrip="用户 openid")
@@ -57,45 +58,44 @@ class ScoreApi @Inject() (val controllerComponents: ControllerComponents) (impli
 
   val Swa = SwaActionBuilder(Action)
 
-  def queryScore1:SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
-    val scoreGet = req.body
-    Future.successful {
-      Score(
-        scoreGet.openid,
-        scoreGet.weixinId,
-        1234L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    }
-  }
+  // def queryScore1:SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
+  //   val scoreGet = req.body
+  //   Future.successful {
+  //     Score(
+  //       scoreGet.openid,
+  //       scoreGet.weixinId,
+  //       1234L,
+  //       DateTime.now(),
+  //       DateTime.now()
+  //     )
+  //   }
+  // }
 
-  def queryScore2: SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
-    val scoreGet = req.body
-    Future.successful {
-      Score(
-        scoreGet.openid,
-        scoreGet.weixinId,
-        1234L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    }
-  }
+  // def queryScore2: SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
+  //   val scoreGet = req.body
+  //   Future.successful {
+  //     Score(
+  //       scoreGet.openid,
+  //       scoreGet.weixinId,
+  //       1234L,
+  //       DateTime.now(),
+  //       DateTime.now()
+  //     )
+  //   }
+  // }
 
-  def queryScore3: SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
-    val scoreGet = req.body
-    Future.successful {
-      Score(
-        scoreGet.openid,
-        scoreGet.weixinId,
-        1234L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    }
-  }
-
+  // def queryScore3: SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
+  //   val scoreGet = req.body
+  //   Future.successful {
+  //     Score(
+  //       scoreGet.openid,
+  //       scoreGet.weixinId,
+  //       1234L,
+  //       DateTime.now(),
+  //       DateTime.now()
+  //     )
+  //   }
+  // }
 
   @ActionAnnotation(descrip="查询用户积分")
   def queryScore: PostSwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
