@@ -308,6 +308,7 @@ div:focus {
 
 .response {
   margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 .h-show {

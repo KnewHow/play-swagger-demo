@@ -49,7 +49,6 @@ class PersonApi(val controllerComponents: ControllerComponents)(implicit ec: Exe
 object PersonApi {
   def getApi = {
     val r = PlaySwagger.playApi[PersonApi]()
-    r
     r.mkString("[", ",", "]")
   }
 

@@ -3,6 +3,8 @@ package com.dripower.play.swa
 import play.api.mvc._
 import play.api.http.Writeable
 import scala.concurrent._
+import dripower.validate._
+import play.api.libs.json.Json
 
 trait SwaAction[A, R] extends Action[A]
 
@@ -28,7 +30,38 @@ class SwaActionBuilder[Req[_], A] private(
     def executionContext = _ec
     def parser = _parser
     def apply(request: Request[A1]) = {
-      builder.apply(parser).invokeBlock(request, (ra: Req[A1]) => body(ra).map(Results.Ok(_)))
+      def validateAccess = {
+        builder.apply(parser).invokeBlock(request, (ra: Req[A1]) => body(ra).map(Results.Ok(_)))
+      }
+
+      def validateFailure(code: Int, msg: String) = {
+        Results.Ok(
+          Json.obj(
+            "errcode" -> Json.toJson(code),
+            "errmsg"  -> Json.toJson(msg)
+          )
+        )
+      }
+      val bg = request.body
+      println(s"requestlala -> ${bg}")
+      bg match {
+        case b: BaseValidate  => {
+          println("match successful")
+          val rs = b.validator
+          if(rs.nonEmpty) {
+            println("validate failure")
+            Future.successful(validateFailure(400,rs(0).left.get))
+          } else {
+            println("validate success")
+            validateAccess
+          }
+        }
+        case _ => {
+          println("match failure")
+          validateAccess
+        }
+      }
+
     }
   }
 
