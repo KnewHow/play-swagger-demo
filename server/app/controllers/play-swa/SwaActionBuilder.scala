@@ -57,7 +57,7 @@ class SwaActionBuilder[Req[_], A] private(
           }
         }
         case _ => {
-          println("match failure")
+          println("don't extend validate")
           validateAccess
         }
       }

@@ -1,4 +1,4 @@
-name := """play-swagger-example"""
+name := """play-swagger-demo"""
 
 version := "1.0-SNAPSHOT"
 
@@ -12,4 +12,4 @@ crossScalaVersions := Seq("2.11.12", "2.12.4")
 
 libraryDependencies += guice
 
-libraryDependencies += "play-swagger-api" %% "play-swagger-api" % "0.1.0-SNAPSHOT"
+libraryDependencies += "play-swagger-api" %% "play-swagger-api" % "0.1.0-SNAPSHOT" // 引入之前的 play-swagger-api 工具包

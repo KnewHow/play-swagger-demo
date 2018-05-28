@@ -67,7 +67,7 @@ object AddBookForm {
 }
 
 object Book {
-  implicit val bookWriteable = Writeable((b: Book) =>
+  implicit val bookWriteable =  Writeable((b: Book) =>
     ByteString(b.toString), Some("text/plain")
   )
 }
