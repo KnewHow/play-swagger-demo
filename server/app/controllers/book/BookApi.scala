@@ -67,8 +67,17 @@ object AddBookForm {
 }
 
 object Book {
+  implicit val bookWrites = Json.writes[Book]
+
   implicit val bookWriteable =  Writeable((b: Book) =>
-    ByteString(b.toString), Some("text/plain")
+    ByteString(
+      Json.stringify(
+        Json.obj(
+          "code" -> 200,
+          "data" -> Json.toJson(b)
+        )
+       )
+    ), Some("application/json")
   )
 }
 
