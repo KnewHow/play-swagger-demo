@@ -14,6 +14,7 @@ import dripower.validate._
 import scala.collection.immutable.List
 import scala.util._
 import play.swagger.response._
+import common._
 
 case class ResidentGet(name: String)
 case class Resident(name: String, age: Int, role: Option[String])
@@ -36,13 +37,17 @@ object Resident {
       Json.stringify(
         Json.obj(
           "code" -> r.code,
-          "data" -> Json.toJson(r.data)
+          "data" -> Json.obj(
+           JsonTool.getCaseClassName(r.data) -> Json.toJson(r.data)
+          )
         )
       )
     ), Some("application/json")
   )
   // implicit val residentWriteable = Json.writes[Resident]
 }
+
+
 class ResidentApi @Inject() (val controllerComponents : ControllerComponents)(implicit ec: ExecutionContext) extends BaseController {
   val Swa = SwaActionBuilder(Action)
 
