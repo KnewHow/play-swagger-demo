@@ -10,6 +10,9 @@ import com.dripower.play.swa._
 import org.joda.time._
 import play.swagger.annotation._
 import scala.annotation.meta
+import common.results._
+import common._
+import play.swagger.response._
 
 case class ScoreInviteRecord(
   @(FieldAnnotation @meta.getter)(descrip="公众号的微信 id")
@@ -55,8 +58,27 @@ object AddInviteRecord {
 }
 
 object ScoreInviteRecord {
-  implicit val scoreInviteWriteable = Writeable((si: ScoreInviteRecord) =>
-    ByteString(si.toString), Some("text/plain")
+  implicit val scoreInviteRecordWrites = new Writes[ScoreInviteRecord] {
+    def writes(s: ScoreInviteRecord) = Json.obj(
+      "weixindId" -> s.weixinId,
+      "inviteOpenid" -> s.inviteOpenid,
+      "invitedOpenid" -> s.invitedOpenid,
+      "inviteRuleId" -> s.inviteRuleId,
+      "gmtCreate" -> s.gmtCreate.toString,
+      "gmtModified" -> s.gmtModified.toString
+    )
+  }
+  implicit val scoreInviteWriteable = Writeable((r:ResBody[ScoreInviteRecord]) =>
+    ByteString(
+      Json.stringify(
+        Json.obj(
+          "code" -> r.code,
+          "data"  -> Json.obj(
+             JsonTool.getCaseClassName(r.data) -> Json.toJson(r.data)
+          )
+        )
+      )
+    ), Some("application/json")
   )
 }
 object ScoreInviteQueryResults {
@@ -70,35 +92,40 @@ class ScoreInviteApi @Inject() (val controllerComponents: ControllerComponents) 
 
   val Swa =  SwaActionBuilder(Action)
 
-  // @ActionAnnotation(descrip="查询用户积分邀请记录")
-  // def queryScoreInviteRecords: PostSwaAction[ScoreInviteQueryFrom, ScoreInviteRecord] = Swa.asyncPost[ScoreInviteQueryFrom, ScoreInviteRecord](parse.json[ScoreInviteQueryFrom]) { req =>
-  //   val sqr = req.body
-  //   val rs =
-  //       ScoreInviteRecord(
-  //         sqr.weixinId,
-  //         sqr.openid,
-  //         "lisi",
-  //         123L,
-  //         DateTime.now(),
-  //         DateTime.now()
-  //       )
-  //   Future.successful {
-  //     rs
-  //   }
-  // }
+  @ActionAnnotation(descrip="查询用户积分邀请记录")
+  def queryScoreInviteRecords: PostSwaAction[ScoreInviteQueryFrom,ResBody[ScoreInviteRecord]] = Swa.asyncPost[ScoreInviteQueryFrom, ResBody[ScoreInviteRecord]](parse.json[ScoreInviteQueryFrom]) { req =>
+    val sqr = req.body
+    val rs =
+      ScoreInviteRecord(
+        sqr.weixinId,
+        sqr.openid,
+        "lisi",
+        123L,
+        DateTime.now(),
+        DateTime.now()
+      )
+    val r = ResBody[ScoreInviteRecord](
+      200,
+      rs
+    )
+    Future.successful {
+      r
+    }
+  }
 
-  //  @ActionAnnotation(descrip="添加用户积分邀请记录")
-  // def addInviteRecord: PostSwaAction[AddInviteRecord, ScoreInviteRecord] = Swa.asyncPost[AddInviteRecord,ScoreInviteRecord](parse.json[AddInviteRecord]) {req =>
-  //   var air = req.body
-  //   Future.successful {
-  //     ScoreInviteRecord(
-  //       air.weixinId,
-  //       air.inviteOpenid,
-  //       air.invitedOpenid,
-  //       123L,
-  //       DateTime.now(),
-  //       DateTime.now()
-  //     )
-  //   }
-  // }
+   @ActionAnnotation(descrip="添加用户积分邀请记录")
+  def addInviteRecord: PostSwaAction[AddInviteRecord, ResBody[ScoreInviteRecord]] = Swa.asyncPost[AddInviteRecord,ResBody[ScoreInviteRecord]](parse.json[AddInviteRecord]) {req =>
+    var air = req.body
+    Future.successful {
+      CommonResults.successful(
+        ScoreInviteRecord(
+          air.weixinId,
+          air.inviteOpenid,
+          air.invitedOpenid,
+          123L,
+          DateTime.now(),
+          DateTime.now()
+        ))
+    }
+  }
 }

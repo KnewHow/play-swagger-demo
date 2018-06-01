@@ -15,8 +15,8 @@ import common._
 
 
 case class BorrowRecord(
-   @(FieldAnnotation @meta.getter)(descrip="借书记录 id")
-     id:String,
+  @(FieldAnnotation @meta.getter)(descrip="借书记录 id")
+    id:String,
   @(FieldAnnotation @meta.getter)(descrip="书籍的id")
     bid: String,
   @(FieldAnnotation @meta.getter)(descrip="学生的id")
@@ -24,7 +24,7 @@ case class BorrowRecord(
   @(FieldAnnotation @meta.getter)(descrip="借书状态，true 已还 false 未还")
     status: Boolean,
   @(FieldAnnotation @meta.getter)(descrip="过期时间")
-  expiredTime: DateTime,
+    expiredTime: DateTime,
   @(FieldAnnotation @meta.getter)(descrip="创建时间")
     gmtCreate: DateTime,
   @(FieldAnnotation @meta.getter)(descrip="修改时间")
@@ -54,7 +54,17 @@ object ReturnBook {
 }
 
 object BorrowRecord {
-  implicit val bookWrites = Json.writes[BorrowRecord]
+  implicit val BorrowRecordWrites = new Writes[BorrowRecord] {
+    def writes(b: BorrowRecord) = Json.obj(
+      "id" -> b.id,
+      "bid" -> b.bid,
+      "sid" -> b.sid,
+      "status" -> b.status,
+      "expiredTime" -> b.expiredTime.toString,
+      "gmtCreate" -> b.gmtCreate.toString,
+      "gmtModified" -> b.gmtModified.toString
+    )
+  }
 
   implicit val bookBorrowWriteable = Writeable((r: ResBody[BorrowRecord]) =>
     ByteString(
@@ -75,19 +85,23 @@ class BorrowBookApi @Inject() (val controllerComponents: ControllerComponents)(i
   val Swa = SwaActionBuilder(Action)
 
 
-  // @ActionAnnotation(descrip="还书接口")
-  // def returnBook: PostSwaAction[ReturnBook, BorrowRecord] = Swa.asyncPost[ReturnBook, BorrowRecord](parse.json[ReturnBook]) {req =>
-  //   val rb = req.body
-  //   Future.successful {
-  //     BorrowRecord(
-  //       "1",
-  //       rb.bid,
-  //       rb.sid,
-  //       true,
-  //       DateTime.now(),
-  //       DateTime.now(),
-  //       DateTime.now()
-  //    )
-  //   }
-  // }
+  @ActionAnnotation(descrip="还书接口")
+  def returnBook: PostSwaAction[ReturnBook, ResBody[BorrowRecord]] = Swa.asyncPost[ReturnBook,  ResBody[BorrowRecord]](parse.json[ReturnBook]) {req =>
+    val rb = req.body
+    val r = ResBody[BorrowRecord](
+      200,
+      BorrowRecord(
+        "1",
+        rb.bid,
+        rb.sid,
+        true,
+        DateTime.now(),
+        DateTime.now(),
+        DateTime.now()
+      )
+    )
+    Future.successful {
+      r
+    }
+  }
 }
