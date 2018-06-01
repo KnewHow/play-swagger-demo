@@ -10,6 +10,8 @@ import com.dripower.play.swa._
 import org.joda.time._
 import play.swagger.annotation._
 import scala.annotation.meta
+import play.swagger.response._
+import common._
 
 
 case class BorrowRecord(
@@ -52,8 +54,19 @@ object ReturnBook {
 }
 
 object BorrowRecord {
-  implicit val bookBorrowWriteable = Writeable((br: BorrowRecord) =>
-    ByteString(br.toString), Some("text/plain")
+  implicit val bookWrites = Json.writes[BorrowRecord]
+
+  implicit val bookBorrowWriteable = Writeable((r: ResBody[BorrowRecord]) =>
+    ByteString(
+      Json.stringify(
+        Json.obj(
+          "code" -> r.code,
+          "data" -> Json.obj(
+            JsonTool.getCaseClassName(r.data) -> Json.toJson(r.data)
+          )
+        )
+      )
+    ), Some("application/json")
   )
 }
 
@@ -62,19 +75,19 @@ class BorrowBookApi @Inject() (val controllerComponents: ControllerComponents)(i
   val Swa = SwaActionBuilder(Action)
 
 
-  @ActionAnnotation(descrip="还书接口")
-  def returnBook: PostSwaAction[ReturnBook, BorrowRecord] = Swa.asyncPost[ReturnBook, BorrowRecord](parse.json[ReturnBook]) {req =>
-    val rb = req.body
-    Future.successful {
-      BorrowRecord(
-        "1",
-        rb.bid,
-        rb.sid,
-        true,
-        DateTime.now(),
-        DateTime.now(),
-        DateTime.now()
-     )
-    }
-  }
+  // @ActionAnnotation(descrip="还书接口")
+  // def returnBook: PostSwaAction[ReturnBook, BorrowRecord] = Swa.asyncPost[ReturnBook, BorrowRecord](parse.json[ReturnBook]) {req =>
+  //   val rb = req.body
+  //   Future.successful {
+  //     BorrowRecord(
+  //       "1",
+  //       rb.bid,
+  //       rb.sid,
+  //       true,
+  //       DateTime.now(),
+  //       DateTime.now(),
+  //       DateTime.now()
+  //    )
+  //   }
+  // }
 }

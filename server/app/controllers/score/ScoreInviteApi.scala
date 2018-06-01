@@ -70,35 +70,35 @@ class ScoreInviteApi @Inject() (val controllerComponents: ControllerComponents) 
 
   val Swa =  SwaActionBuilder(Action)
 
-  @ActionAnnotation(descrip="查询用户积分邀请记录")
-  def queryScoreInviteRecords: PostSwaAction[ScoreInviteQueryFrom, ScoreInviteRecord] = Swa.asyncPost[ScoreInviteQueryFrom, ScoreInviteRecord](parse.json[ScoreInviteQueryFrom]) { req =>
-    val sqr = req.body
-    val rs =
-        ScoreInviteRecord(
-          sqr.weixinId,
-          sqr.openid,
-          "lisi",
-          123L,
-          DateTime.now(),
-          DateTime.now()
-        )
-    Future.successful {
-      rs
-    }
-  }
+  // @ActionAnnotation(descrip="查询用户积分邀请记录")
+  // def queryScoreInviteRecords: PostSwaAction[ScoreInviteQueryFrom, ScoreInviteRecord] = Swa.asyncPost[ScoreInviteQueryFrom, ScoreInviteRecord](parse.json[ScoreInviteQueryFrom]) { req =>
+  //   val sqr = req.body
+  //   val rs =
+  //       ScoreInviteRecord(
+  //         sqr.weixinId,
+  //         sqr.openid,
+  //         "lisi",
+  //         123L,
+  //         DateTime.now(),
+  //         DateTime.now()
+  //       )
+  //   Future.successful {
+  //     rs
+  //   }
+  // }
 
-   @ActionAnnotation(descrip="添加用户积分邀请记录")
-  def addInviteRecord: PostSwaAction[AddInviteRecord, ScoreInviteRecord] = Swa.asyncPost[AddInviteRecord,ScoreInviteRecord](parse.json[AddInviteRecord]) {req =>
-    var air = req.body
-    Future.successful {
-      ScoreInviteRecord(
-        air.weixinId,
-        air.inviteOpenid,
-        air.invitedOpenid,
-        123L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    }
-  }
+  //  @ActionAnnotation(descrip="添加用户积分邀请记录")
+  // def addInviteRecord: PostSwaAction[AddInviteRecord, ScoreInviteRecord] = Swa.asyncPost[AddInviteRecord,ScoreInviteRecord](parse.json[AddInviteRecord]) {req =>
+  //   var air = req.body
+  //   Future.successful {
+  //     ScoreInviteRecord(
+  //       air.weixinId,
+  //       air.inviteOpenid,
+  //       air.invitedOpenid,
+  //       123L,
+  //       DateTime.now(),
+  //       DateTime.now()
+  //     )
+  //   }
+  // }
 }

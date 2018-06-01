@@ -13,6 +13,8 @@ import scala.annotation.meta
 import dripower.validate._
 import scala.collection.immutable.List
 import scala.util._
+import play.swagger.response._
+import common._
 
 case class GetBook(
    @(FieldAnnotation @meta.getter)(descrip="书籍的 id")
@@ -69,14 +71,16 @@ object AddBookForm {
 object Book {
   implicit val bookWrites = Json.writes[Book]
 
-  implicit val bookWriteable =  Writeable((b: Book) =>
+  implicit val bookWriteable =  Writeable((r:ResBody[Book]) =>
     ByteString(
       Json.stringify(
         Json.obj(
           "code" -> 200,
-          "data" -> Json.toJson(b)
+          "data" ->  Json.obj(
+            JsonTool.getCaseClassName(r.data) -> Json.toJson(r.data)
+          )
         )
-       )
+      )
     ), Some("application/json")
   )
 }
@@ -86,28 +90,37 @@ class BookApi @Inject() (val controllerComponents: ControllerComponents)(implici
   val Swa =  SwaActionBuilder(Action)
 
   @ActionAnnotation(descrip="根据图书id查询图书信息")
-  def queryBook:PostSwaAction[GetBook, Book] = Swa.asyncPost[GetBook, Book](parse.json[GetBook]) {req =>
+  def queryBook:PostSwaAction[GetBook, ResBody[Book]] = Swa.asyncPost[GetBook, ResBody[Book]](parse.json[GetBook]) {req =>
     val bg = req.body
+    val b =  Book(
+      bg.id,
+      "dive into kotlin",
+      "dripower",
+      "机械工业出版社"
+    )
+    val r = ResBody[Book](
+      200,
+      b
+    )
     Future.successful{
-      Book(
-        bg.id,
-        "dive into kotlin",
-        "dripower",
-        "机械工业出版社"
-      )
+      r
     }
   }
 
   @ActionAnnotation(descrip="添加图书信息")
-  def addBook: PostSwaAction[AddBookForm, Book] = Swa.asyncPost[AddBookForm, Book](parse.json[AddBookForm]) {req =>
+  def addBook: PostSwaAction[AddBookForm, ResBody[Book]] = Swa.asyncPost[AddBookForm, ResBody[Book]](parse.json[AddBookForm]) {req =>
     val abf = req.body
-    Future.successful {
-       Book(
-         "aodcbjasbxsdbaj",
-         abf.name,
-         abf.publish,
-         abf.author
+    val r = ResBody[Book](
+      200,
+      Book(
+        "aodcbjasbxsdbaj",
+        abf.name,
+        abf.publish,
+        abf.author
       )
+    )
+    Future.successful {
+      r
     }
   }
 }

@@ -58,7 +58,8 @@ class ScoreApi @Inject() (val controllerComponents: ControllerComponents) (impli
 
   val Swa = SwaActionBuilder(Action)
 
-  // def queryScore1:SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
+  // @ActionAnnotation(descrip="查询用户积分")
+  // def queryScore: PostSwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
   //   val scoreGet = req.body
   //   Future.successful {
   //     Score(
@@ -71,59 +72,19 @@ class ScoreApi @Inject() (val controllerComponents: ControllerComponents) (impli
   //   }
   // }
 
-  // def queryScore2: SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
-  //   val scoreGet = req.body
+
+
+  // @ActionAnnotation(descrip="更新用户积分")
+  // def updateScore: PostSwaAction[ScoreUpdateForm, Score] = Swa.asyncPost[ScoreUpdateForm, Score](parse.json[ScoreUpdateForm]) { req =>
+  //   val suf = req.body
   //   Future.successful {
   //     Score(
-  //       scoreGet.openid,
-  //       scoreGet.weixinId,
+  //       suf.openid,
+  //       suf.weixinId,
   //       1234L,
   //       DateTime.now(),
   //       DateTime.now()
   //     )
   //   }
   // }
-
-  // def queryScore3: SwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
-  //   val scoreGet = req.body
-  //   Future.successful {
-  //     Score(
-  //       scoreGet.openid,
-  //       scoreGet.weixinId,
-  //       1234L,
-  //       DateTime.now(),
-  //       DateTime.now()
-  //     )
-  //   }
-  // }
-
-  @ActionAnnotation(descrip="查询用户积分")
-  def queryScore: PostSwaAction [ScoreGet, Score] = Swa.asyncPost[ScoreGet,Score](parse.json[ScoreGet]) { req =>
-    val scoreGet = req.body
-    Future.successful {
-      Score(
-        scoreGet.openid,
-        scoreGet.weixinId,
-        1234L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    }
-  }
-
-
-
-  @ActionAnnotation(descrip="更新用户积分")
-  def updateScore: PostSwaAction[ScoreUpdateForm, Score] = Swa.asyncPost[ScoreUpdateForm, Score](parse.json[ScoreUpdateForm]) { req =>
-    val suf = req.body
-    Future.successful {
-      Score(
-        suf.openid,
-        suf.weixinId,
-        1234L,
-        DateTime.now(),
-        DateTime.now()
-      )
-    }
-  }
 }
