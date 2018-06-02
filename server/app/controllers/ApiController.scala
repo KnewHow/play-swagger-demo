@@ -17,8 +17,7 @@ class ApiController @Inject()(cc: ControllerComponents) (implicit assetsFinder: 
     PersonApi.getApi
     val apis = List(
       scoreApi,
-      bookApi,
-      residentApi
+      bookApi
     ).mkString("[", ",", "]")
     println(s"${DateTime.now()} ->\n ${apis}")
     Ok(apis)
@@ -42,14 +41,6 @@ class ApiController @Inject()(cc: ControllerComponents) (implicit assetsFinder: 
     ).mkString("[", ",", "]")
 
     "{" + "\"" + "book" +  "\"" + ":" + apis + "}"
-  }
-
-  private def residentApi:String = {
-    import controllers.resident._
-    val apis = List(
-       getControllerJson("居民信息获取",  PlaySwagger.playApi[ResidentApi]().mkString("[", ",", "]"))
-    ).mkString("[", ",", "]")
-    "{" + "\"" + "居民信息接口" +  "\"" + ":" + apis + "}"
   }
 
   // private def personApi:String = {

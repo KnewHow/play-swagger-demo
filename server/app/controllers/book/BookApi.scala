@@ -72,10 +72,7 @@ object Book {
   implicit val bookWriteable =  Writeable((b: Book) =>
     ByteString(
       Json.stringify(
-        Json.obj(
-          "code" -> 200,
-          "data" -> Json.toJson(b)
-        )
+        Json.toJson(b)
        )
     ), Some("application/json")
   )
