@@ -76,9 +76,7 @@ object Book {
       Json.stringify(
         Json.obj(
           "code" -> 200,
-          "data" ->  Json.obj(
-            JsonTool.getCaseClassName(r.data) -> Json.toJson(r.data)
-          )
+          "data" -> Json.toJson(r.data)
         )
       )
     ), Some("application/json")

@@ -70,9 +70,10 @@
                 <th>描述</th>
               </tr>
               <tr v-for="(v,k) in api.req" :key="k">
-                <td>{{k}}</td>
-                <td>{{v.type}}</td>
-                <td>{{v.describe}}</td>
+                  <td>{{k}}</td>
+                  <td>{{v.type}}</td>
+                  <td>{{v.describe}}</td>
+
               </tr>
             </table>
           </div>
@@ -88,9 +89,27 @@
                 <th>描述</th>
               </tr>
               <tr v-for="(v,k) in api.res" :key="k">
-                <td>{{k}}</td>
-                <td>{{v.type}}</td>
-                <td>{{v.describe}}</td>
+                <td v-if="k =='code'">{{k}}</td>
+                <td v-if="k =='code'">{{v.type}}</td>
+                <td v-if="k =='code'">{{v.describe}}</td>
+                <td v-if="k =='data'">{{k}}</td>
+                <td v-if="k =='data'">JSON</td>
+                <td v-if="k =='data'">
+                  <div class="data-show">
+                    <table class="suber-table" border="0">
+                      <tr>
+                        <th>参数名称</th>
+                        <th>参数类型</th>
+                        <th>描述</th>
+                      </tr>
+                      <tr v-for="(v1,k1) in api.res.data" :key="k1" class="data-class">
+                        <td>{{k1}}</td>
+                        <td >{{v1.type}}</td>
+                        <td>{{v1.describe}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
               </tr>
             </table>
           </div>
@@ -305,7 +324,30 @@ div:focus {
   color: #fff;
   background-color: green;
 }
-
+.data-show {
+  padding:10px 10px 10px 10px;
+}
+.suber-table {
+  font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  padding-left:30px;
+}
+.suber-table th, .suber-table td {
+  font-size: 14px;
+  border:1px solid #000;
+  padding:3px 7px 2px 7px;
+}
+.suber-table th {
+  font-size: 14px;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 4px;
+  color: #fff;
+  background-color: rgb(233, 104, 107);
+}
+.data-class {
+  text-align: center;
+}
 .response {
   margin-top: 20px;
   margin-bottom: 50px;
